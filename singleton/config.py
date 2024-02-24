@@ -1,7 +1,8 @@
+from misc.singleton import singleton
 from pathlib import Path
-
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings
+from threading import Lock
 
 BASE_DIR = Path(__file__).parent.parent
 
@@ -19,9 +20,7 @@ class AuthJWT(BaseModel):
     refresh_token_expire_minutes: int = 60
 
 
+@singleton
 class Settings(BaseSettings):
     jwt: AuthJWT = AuthJWT()
     db: DBSettings = DBSettings()
-
-
-settings = Settings()
