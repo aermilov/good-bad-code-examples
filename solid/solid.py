@@ -1,13 +1,14 @@
+from abc import ABC, abstractmethod
+
 class Vehicle:
-    def __init__(self, type):
-        self.type = type
-
-    def get_type(self):
-        return self.type
-
+    @abstractmethod
     def move(self):
-        if self.type == "car":
-            print("Driving a car")
-        elif self.type == "airplane":
-            print("Flying an airplane")
+        pass
 
+class Car(Vehicle):
+    def move(self):
+        print("Driving a car")
+
+class Airplane(Vehicle):
+    def move(self):
+        print("Flying an airplane")
