@@ -2,7 +2,12 @@ import psycopg2
 
 class Database:
     def __init__(self):
-        self.connection = self.connect_to_database()
+        self.connection = None
+
+    def get_connection(self):
+        if self._connection is None:
+            self._connection = self.connect_to_database()
+        return self._connection
 
     def connect_to_database(self):
         print("Подключение к базе данных")
@@ -20,27 +25,42 @@ class Database:
 
 class HeavyResource:
     def __init__(self):
-        print("Загрузка тяжелого ресурса")
-        # Предположим, здесь происходит загрузка большого объема данных или сложная инициализация
-        self.data = "some_large_data"
+        self._data = None
+
+    def get_data(self):
+        if self._data is None:
+            print("Загрузка тяжелого ресурса")
+            self._data = "some_large_data"
+        return self._data
 
 class User:
     def __init__(self):
-        self.profile_picture = self.load_profile_picture()
+        self.profile_picture = None
 
-    def load_profile_picture(self):
-        print("Загрузка изображения профиля пользователя")
-        # Загрузка изображения
-        return "profile_picture_data"
+    def get_profile_picture(self):
+        if self._profile_picture is None:
+            print("Загрузка изображения профиля пользователя")
+            # Здесь происходит загрузка изображения
+            self._profile_picture = "profile_picture_data"
+        return self._profile_picture
 
 class Application:
     def __init__(self):
-        self.database = Database()
-        self.heavy_resource = HeavyResource()
+        self.database = None
+        self.heavy_resource = None
         self.users = [User() for _ in range(5)]
 
+    def get_database(self):
+        if self._database is None:
+            self._database = Database()
+        return self._database
+
+    def get_heavy_resource(self):
+        if self._heavy_resource is None:
+            self._heavy_resource = HeavyResource()
+        return self._heavy_resource
+
     def run(self):
-        # Здесь код, который может и не использовать все предварительно загруженные ресурсы
         print("Запуск приложения")
 
 app = Application()
