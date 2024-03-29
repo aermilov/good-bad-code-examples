@@ -1,13 +1,11 @@
 import React, { useState, ChangeEvent, FC } from 'react';
 
-// Define a type for the field
 type Field = {
   type: 'text' | 'email' | 'password' | 'checkbox';
   name: string;
   label: string;
 };
 
-// Improved FormBuilder class with type safety
 class FormBuilder {
   private fields: Field[];
 
