@@ -52,10 +52,10 @@ class LoanManager:
 
 class LibraryFacade:
     """Фасад для управления библиотекой"""
-    def __init__(self):
-        self.book_manager = BookManager()
-        self.reader_manager = ReaderManager()
-        self.loan_manager = LoanManager()
+    def __init__(self, book_manager, reader_manager, loan_manager):
+        self.book_manager = book_manager
+        self.reader_manager = reader_manager
+        self.loan_manager = loan_manager
 
     def register_new_reader(self, name, email):
         self.reader_manager.register_reader(name, email)
@@ -73,7 +73,7 @@ class LibraryFacade:
 
 if __name__ == "__main__":
     # Инициализация фасада библиотеки
-    library = LibraryFacade()
+    library = LibraryFacade(BookManager(), ReaderManager(), LoanManager())
 
     # Регистрация читателей
     readers = [
