@@ -1,7 +1,27 @@
-class File:
+from abc import ABC, abstractmethod
+
+class FileSystemComponent(ABC):
     def __init__(self, name):
         self.name = name
 
+    @abstractmethod
+    def display(self):
+        pass
+
+    @abstractmethod
+    def move(self, new_path):
+        pass
+
+    @abstractmethod
+    def copy(self, new_path):
+        pass
+
+    @abstractmethod
+    def delete(self):
+        pass
+
+
+class File(FileSystemComponent):
     def display(self):
         print(f"Файл: {self.name}")
 
@@ -15,9 +35,9 @@ class File:
         print(f"Удаление файла {self.name}")
 
 
-class Folder:
+class Folder(FileSystemComponent):
     def __init__(self, name):
-        self.name = name
+        super().__init__(name)
         self.children = []
 
     def add_child(self, child):
