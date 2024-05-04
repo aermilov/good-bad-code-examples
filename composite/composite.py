@@ -66,3 +66,37 @@ class Folder(FileSystemComponent):
         for child in self.children:
             child.delete()
         self.children.clear()
+
+if __name__ == '__main__':
+    # Создаем файлы
+    file1 = File("file1.txt")
+    file2 = File("file2.txt")
+    file3 = File("file3.txt")
+    
+    # Создаем папки
+    folder1 = Folder("Folder 1")
+    folder2 = Folder("Folder 2")
+    
+    # Добавляем файлы в папки
+    folder1.add_child(file1)
+    folder1.add_child(file2)
+    folder2.add_child(file3)
+    
+    # Добавляем папки в другую папку
+    main_folder = Folder("Main Folder")
+    main_folder.add_child(folder1)
+    main_folder.add_child(folder2)
+    
+    # Отображаем содержимое
+    main_folder.display()
+    
+    # Перемещаем папку
+    main_folder.move("/New Location")
+    
+    # Копируем папку
+    main_folder.copy("/Backup")
+    
+    # Удаляем папку
+    main_folder.delete()
+
+
